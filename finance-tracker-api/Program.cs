@@ -67,6 +67,9 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+// Register ExchangeRateService
+builder.Services.AddHttpClient<ExchangeRateService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline
