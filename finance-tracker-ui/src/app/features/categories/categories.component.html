@@ -1,0 +1,73 @@
+<div class="categories-container">
+  <div class="page-header">
+    <h2 class="page-title">Categories</h2>
+    <button mat-raised-button color="primary" (click)="openForm()">
+      <mat-icon>add</mat-icon> Add Category
+    </button>
+  </div>
+
+  <!-- Add Form -->
+  <mat-card class="form-card" *ngIf="showForm">
+    <mat-card-header>
+      <mat-card-title>New Category</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Category Name</mat-label>
+          <input matInput [(ngModel)]="form.name" placeholder="e.g. Groceries" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Type</mat-label>
+          <mat-select [(ngModel)]="form.type">
+            <mat-option value="income">Income</mat-option>
+            <mat-option value="expense">Expense</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="saveCategory()">Save</button>
+      <button mat-button (click)="cancelForm()">Cancel</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <!-- Categories Table -->
+  <mat-card class="table-card">
+    <mat-card-content>
+      <table mat-table [dataSource]="categories" class="full-width">
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let c">{{ c.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef>Type</th>
+          <td mat-cell *matCellDef="let c">
+            <span class="type-badge" [class.income]="c.type === 'income'" [class.expense]="c.type === 'expense'">
+              {{ c.type }}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let c">
+            <button mat-icon-button color="warn" (click)="deleteCategory(c.id!)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <p class="empty-state" *ngIf="categories.length === 0">
+        No categories yet. Click "Add Category" to get started.
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,95 @@
+<div class="transactions-container">
+  <div class="page-header">
+    <h2 class="page-title">Transactions</h2>
+    <button mat-raised-button color="primary" (click)="openForm()">
+      <mat-icon>add</mat-icon> Add Transaction
+    </button>
+  </div>
+
+  <!-- Add/Edit Form -->
+  <mat-card class="form-card" *ngIf="showForm">
+    <mat-card-header>
+      <mat-card-title>{{ isEditing ? 'Edit Transaction' : 'New Transaction' }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Description</mat-label>
+          <input matInput [(ngModel)]="form.description" placeholder="e.g. Groceries" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Amount (R)</mat-label>
+          <input matInput type="number" [(ngModel)]="form.amount" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Category</mat-label>
+          <mat-select [(ngModel)]="form.categoryId">
+            <mat-option *ngFor="let cat of categories" [value]="cat.id">
+              {{ cat.name }} ({{ cat.type }})
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Date</mat-label>
+          <input matInput type="date" [(ngModel)]="form.date" />
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="saveTransaction()">
+        {{ isEditing ? 'Update' : 'Save' }}
+      </button>
+      <button mat-button (click)="cancelForm()">Cancel</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <!-- Transactions Table -->
+  <mat-card class="table-card">
+    <mat-card-content>
+      <table mat-table [dataSource]="transactions" class="full-width">
+
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>Date</th>
+          <td mat-cell *matCellDef="let t">{{ t.date | date:'mediumDate' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Description</th>
+          <td mat-cell *matCellDef="let t">{{ t.description }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef>Category</th>
+          <td mat-cell *matCellDef="let t">{{ getCategoryName(t.categoryId) }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef>Amount</th>
+          <td mat-cell *matCellDef="let t">R {{ t.amount | number:'1.2-2' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let t">
+            <button mat-icon-button color="primary" (click)="editTransaction(t)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteTransaction(t.id!)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <p class="empty-state" *ngIf="transactions.length === 0">
+        No transactions yet. Click "Add Transaction" to get started.
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>

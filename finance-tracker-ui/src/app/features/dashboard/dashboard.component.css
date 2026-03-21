@@ -1,0 +1,87 @@
+.dashboard-container {
+  padding: 24px;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.summary-card mat-card-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+}
+
+.card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.income .card-icon {
+  background-color: #e8f5e9;
+  color: #4caf50;
+}
+
+.expenses .card-icon {
+  background-color: #ffebee;
+  color: #f44336;
+}
+
+.balance .card-icon {
+  background-color: #e3f2fd;
+  color: #2196f3;
+}
+
+.card-label {
+  font-size: 13px;
+  color: #757575;
+  margin: 0;
+}
+
+.card-value {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 4px 0 0;
+  color: #333;
+}
+
+.charts-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.chart-card mat-card-content {
+  padding: 16px;
+}
+
+.empty-state {
+  text-align: center;
+  color: #9e9e9e;
+  padding: 32px 0;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .summary-cards {
+    grid-template-columns: 1fr;
+  }
+  .charts-row {
+    grid-template-columns: 1fr;
+  }
+}

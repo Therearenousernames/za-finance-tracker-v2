@@ -1,0 +1,111 @@
+<div class="budgets-container">
+  <div class="page-header">
+    <h2 class="page-title">Budgets</h2>
+    <button mat-raised-button color="primary" (click)="openForm()">
+      <mat-icon>add</mat-icon> Add Budget
+    </button>
+  </div>
+
+  <!-- Add Form -->
+  <mat-card class="form-card" *ngIf="showForm">
+    <mat-card-header>
+      <mat-card-title>New Budget</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="form-row">
+        <mat-form-field appearance="outline">
+          <mat-label>Category</mat-label>
+          <mat-select [(ngModel)]="form.categoryId">
+            <mat-option *ngFor="let cat of categories" [value]="cat.id">
+              {{ cat.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Budget Amount (R)</mat-label>
+          <input matInput type="number" [(ngModel)]="form.amount" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Month</mat-label>
+          <mat-select [(ngModel)]="form.month">
+            <mat-option [value]="1">January</mat-option>
+            <mat-option [value]="2">February</mat-option>
+            <mat-option [value]="3">March</mat-option>
+            <mat-option [value]="4">April</mat-option>
+            <mat-option [value]="5">May</mat-option>
+            <mat-option [value]="6">June</mat-option>
+            <mat-option [value]="7">July</mat-option>
+            <mat-option [value]="8">August</mat-option>
+            <mat-option [value]="9">September</mat-option>
+            <mat-option [value]="10">October</mat-option>
+            <mat-option [value]="11">November</mat-option>
+            <mat-option [value]="12">December</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Year</mat-label>
+          <input matInput type="number" [(ngModel)]="form.year" />
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="saveBudget()">Save</button>
+      <button mat-button (click)="cancelForm()">Cancel</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <!-- Budgets Table -->
+  <mat-card class="table-card">
+    <mat-card-content>
+      <table mat-table [dataSource]="budgets" class="full-width">
+
+        <ng-container matColumnDef="category">
+          <th mat-header-cell *matHeaderCellDef>Category</th>
+          <td mat-cell *matCellDef="let b">{{ getCategoryName(b.categoryId) }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef>Budget</th>
+          <td mat-cell *matCellDef="let b">R {{ b.amount | number:'1.2-2' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="spent">
+          <th mat-header-cell *matHeaderCellDef>Spent</th>
+          <td mat-cell *matCellDef="let b" [class.over-budget]="getSpent(b) > b.amount">
+            R {{ getSpent(b) | number:'1.2-2' }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="progress">
+          <th mat-header-cell *matHeaderCellDef>Progress</th>
+          <td mat-cell *matCellDef="let b">
+            <mat-progress-bar
+              [value]="getProgress(b)"
+              [color]="getProgress(b) >= 100 ? 'warn' : 'primary'">
+            </mat-progress-bar>
+            <span class="progress-label">{{ getProgress(b) | number:'1.0-0' }}%</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let b">
+            <button mat-icon-button color="warn" (click)="deleteBudget(b.id!)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <p class="empty-state" *ngIf="budgets.length === 0">
+        No budgets yet. Click "Add Budget" to get started.
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
