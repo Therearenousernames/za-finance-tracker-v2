@@ -43,7 +43,7 @@ mat-nav-list a:hover {
   top: 0;
   z-index: 1000;
   background-color: var(--bg-card) !important;
-  color: var(--text-primary) !important;
+  /* color: var(--text-primary) !important; */
   border-bottom: 1px solid var(--border);
   box-shadow: var(--shadow);
   height: 64px;
