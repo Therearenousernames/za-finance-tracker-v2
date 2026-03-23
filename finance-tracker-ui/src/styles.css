@@ -62,9 +62,7 @@ body {
   border: 1px solid var(--border) !important;
 }
 
-.mdc-list-item {
-  color: var(--text-secondary);
-}
+
 
 .mat-mdc-table {
   background-color: var(--bg-card) !important;
@@ -110,7 +108,9 @@ body {
   color: var(--text-secondary) !important;
 }
 
-
+.mdc-list-item__primary-text {
+  color: var(--text-primary) !important;
+}
 
 
 /* Scrollbar */
@@ -158,5 +158,10 @@ body {
 
 /* Ensure toolbar buttons are correct in dark mode */
 [data-theme="dark"] .mat-toolbar .mat-mdc-icon-button {
+  color: var(--text-primary) !important;
+}
+
+/* Fix sidenav liist text in dark mode */
+[data-theme="dark"] .mdc-list-item__primary-text {
   color: var(--text-primary) !important;
 }
