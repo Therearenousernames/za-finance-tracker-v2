@@ -7,7 +7,10 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Auth } from './core/auth.service';
+import { ThemeService } from './core/theme.service';
+
 
 @Component({
   selector: 'app-root',
@@ -20,7 +23,8 @@ import { Auth } from './core/auth.service';
     MatSidenavModule,
     MatListModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTooltipModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -29,7 +33,11 @@ export class AppComponent {
   title = 'Finance Tracker';
   @ViewChild('sidenav') sidenav!: MatSidenav;
 
-  constructor(public authService: Auth, private router: Router) {}
+  constructor(
+    public authService: Auth, 
+    private router: Router,
+    public themeService: ThemeService
+  ) {}
 
   logout() {
     this.authService.logout();

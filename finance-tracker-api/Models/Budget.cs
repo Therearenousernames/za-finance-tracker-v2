@@ -9,7 +9,7 @@ namespace finance_tracker_api.Models
         public int Month {get; set;} // 1-12
         public int Year {get; set;}
         
-        public User User {get; set;} = null!;
-        public Category Category {get; set;} = null!;
+        public User? User {get; set;}
+        public Category? Category {get; set;} = null!;
     }
 }
