@@ -62,6 +62,10 @@ body {
   border: 1px solid var(--border) !important;
 }
 
+.mdc-list-item {
+  color: var(--text-secondary);
+}
+
 .mat-mdc-table {
   background-color: var(--bg-card) !important;
   color: var(--text-primary) !important;
