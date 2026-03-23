@@ -12,7 +12,7 @@ export interface Category {
   providedIn: 'root',
 })
 export class CategoryService {
-  private apiUrl = 'https://za-finance-tracker.onrender.com/api/Categories';
+  private apiUrl = 'http://localhost:5289/api/Categories';
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<Category[]> {
@@ -24,6 +24,6 @@ export class CategoryService {
   }
 
   delete(id: number) : Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.apiUrl}/${id}`, {})
   }
 }

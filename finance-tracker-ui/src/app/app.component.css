@@ -106,7 +106,7 @@ mat-nav-list a:hover {
 mat-nav-list a {
   margin: 4px 8px;
   border-radius: var(--radius-sm);
-  color: var(--text-secondary) !important;
+  color: var(--texty) !important;
   transition: var(--transition);
 }
 
@@ -116,7 +116,7 @@ mat-nav-list a:hover {
 }
 
 mat-nav-list a mat-icon {
-  color: var(--text-secondary);
+  color: var(--text-primary);
 }
 
 mat-nav-list a:hover mat-icon {
