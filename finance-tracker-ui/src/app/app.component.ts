@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -29,7 +29,7 @@ import { ThemeService } from './core/theme.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Finance Tracker';
   @ViewChild('sidenav') sidenav!: MatSidenav;
 
@@ -38,6 +38,10 @@ export class AppComponent {
     private router: Router,
     public themeService: ThemeService
   ) {}
+
+  ngOnInit() {
+      this.themeService.isDarkMode();
+  }
 
   logout() {
     this.authService.logout();

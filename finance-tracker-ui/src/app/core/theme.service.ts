@@ -32,7 +32,7 @@ export class ThemeService {
     }
 
     private applyTheme() {
-        document.documentElement.setAttribute('data-theme', this.darkMode ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', this.darkMode ? 'dark' : 'light')
     }
 
     toggleTheme() {

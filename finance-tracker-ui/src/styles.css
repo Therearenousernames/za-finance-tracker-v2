@@ -102,6 +102,13 @@ body {
   background-color: var(--bg-card) !important;
 }
 
+.mat-mdc-icon-button {
+  color: var(--text-secondary) !important;
+}
+
+
+
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
@@ -118,4 +125,34 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
+}
+
+/* =========================
+   FIX TOOLBAR IN DARK MODE
+   ========================= */
+
+/* Toolbar text */
+[data-theme="dark"] .mat-toolbar,
+[data-theme="dark"] .toolbar {
+  color: var(--text-primary) !important;
+}
+
+/* Icons inside toolbar */
+[data-theme="dark"] .mat-toolbar .mat-icon {
+  color: var(--text-primary) !important;
+}
+
+/* Buttons inside toolbar */
+[data-theme="dark"] .mat-toolbar button {
+  color: var(--text-primary) !important;
+}
+
+/* Force all children (final fallback) */
+[data-theme="dark"] .mat-toolbar * {
+  color: var(--text-primary) !important;
+}
+
+/* Ensure toolbar buttons are correct in dark mode */
+[data-theme="dark"] .mat-toolbar .mat-mdc-icon-button {
+  color: var(--text-primary) !important;
 }
